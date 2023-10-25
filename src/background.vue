@@ -1,13 +1,10 @@
 <template>
-  <div class="youtube-background">
-    <iframe 
-      id="bg-video"
-      :src="videoUrl"
-      frameborder="0"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-    ></iframe>
-    <slot></slot>
+  <div class="background-video">
+    <!-- Add your video embedding code here -->
+    <iframe width="100%" height="100%" 
+            src="https://www.youtube.com/embed/_MLGLDGypAE?autoplay=1&mute=1&loop=1&playlist=_MLGLDGypAE"
+            frameborder="0" allowfullscreen>
+    </iframe>
   </div>
 </template>
 
@@ -16,35 +13,19 @@ export default {
   props: {
     videoId: {
       type: String,
-      required: true,
-    },
-  },
-  computed: {
-    videoUrl() {
-      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${this.videoId}&iv_load_policy=3&modestbranding=1&showinfo=0&rel=0`;
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>
 
 <style scoped>
-.youtube-background {
+.background-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-#iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  transform: translate(-50%, -50%);
-  background: transparent;
+  z-index: -1; /* Ensure video is behind other content */
 }
 </style>
