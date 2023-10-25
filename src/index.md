@@ -2,8 +2,6 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
-<background videoId="_MLGLDGypAE" />
-
 hero:
   name: NTNUI Darts
   # text: 'Information and news'
@@ -38,3 +36,4 @@ features:
     details: Our handcrafted darts-tracking app
     link: /darts-quest
 ---
+<background videoId="_MLGLDGypAE" />
