@@ -2,7 +2,7 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
-<background videoId="MLGLDGypAE&t=103s" />
+<background videoId="_MLGLDGypAE" />
 
 hero:
   name: NTNUI Darts
