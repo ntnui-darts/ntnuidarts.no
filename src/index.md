@@ -23,6 +23,10 @@ features:
     icon: 📆
     details: Don't miss our next tournament
     link: /events
+  - title: Shop
+    icon: 🛍️
+    details: Get our coolest merch
+    link: /shop
   - title: About
     icon: 🧭
     details: General information, links and board members
