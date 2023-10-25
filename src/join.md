@@ -1,5 +1,5 @@
 # Join NTNUI Darts
 
-We are so happy that you would like to play darts with us! 🥳
+We are so happy that you want to play darts with us! 🥳
 
-Our member application system is in progress. Please contact [Gregor Moe](mailto:moethegregor@gmail.com) to apply.
+[Apply here!](https://medlem.ntnui.no/groups/darts/)
