@@ -20,7 +20,7 @@ If you have any questions regarding NTNUI Darts or darts in general, feel free t
 | Cashier        | Magne Tenstad              | darts-kasserer@ntnui.no   |
 | Social Media   | Mikkel Nes                 | darts-sosial@ntnui.no*    |
 | Tournaments    | Ludvik Hembre              | darts-turnering@ntnui.no* |
-| Parasports     | Nikolay Hiller Klausen     | darts-para@ntnui.no*      |
+| Inventory      | Nikolay Hiller Klausen     | darts-material@ntnui.no*  |
 | Parasports     | Stian Alseth               | darts-para@ntnui.no*      |
 
 > *not currently available.
