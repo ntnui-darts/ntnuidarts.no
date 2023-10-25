@@ -8,7 +8,6 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/png', href: '/ntnui-darts.png' }],
   ],
   srcDir: './src',
-  base: '/web',
   themeConfig: {
     logo: '/ntnui-darts.png',
     // https://vitepress.dev/reference/default-theme-config
