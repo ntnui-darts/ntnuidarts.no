@@ -36,4 +36,3 @@ features:
     details: Our handcrafted darts-tracking app
     link: /darts-quest
 ---
-<background videoId="_MLGLDGypAE" />
