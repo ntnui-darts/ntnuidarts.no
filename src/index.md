@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'NTNUI Darts'
+  name: NTNUI Darts
   # text: 'Information and news'
   tagline: Information and news
   actions:
@@ -24,7 +24,7 @@ features:
     details: Don't miss our next tournament
     link: /events
   - title: About
-    icon: 🧑‍🤝‍🧑
+    icon: 🧭
     details: General information, links and board members
     link: /about
   - title: darts.quest
