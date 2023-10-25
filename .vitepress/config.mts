@@ -4,9 +4,13 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'NTNUI Darts',
   description: 'Information and news about NTNUI Darts',
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', href: '/ntnui-darts.png' }],
+  ],
   srcDir: './src',
   base: '/web',
   themeConfig: {
+    logo: '/ntnui-darts.png',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
