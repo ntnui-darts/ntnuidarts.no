@@ -6,6 +6,7 @@ export default defineConfig({
   description: 'Information and news about NTNUI Darts',
   outDir: './docs',
   srcDir: './src',
+  base: '/web',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
