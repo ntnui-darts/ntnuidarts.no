@@ -4,7 +4,6 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'NTNUI Darts',
   description: 'Information and news about NTNUI Darts',
-  outDir: './docs',
   srcDir: './src',
   base: '/web',
   themeConfig: {
