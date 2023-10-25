@@ -1,6 +1,3 @@
-
-<BackgroundVideo videoId="_MLGLDGypAE" />
-
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
