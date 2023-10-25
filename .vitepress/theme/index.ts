@@ -1,17 +1,12 @@
-// https://vitepress.dev/guide/custom-theme
+// .vitepress/theme/index.js
 import { h } from 'vue'
-import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import BackgroundVideo from '../../src/components/BackgroundVideo.vue'
 import './style.css'
 
 export default {
-  extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    })
+  ...DefaultTheme,
+  enhanceApp({ app }) {
+    app.component('BackgroundVideo', BackgroundVideo)
   },
-  enhanceApp({ app, router, siteData }) {
-    // ...
-  }
-} satisfies Theme
+}
