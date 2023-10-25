@@ -1,5 +1,4 @@
 ---
-<YoutubeBackground videoId="https://www.youtube.com/watch?v=_MLGLDGypAE&t=103s" />
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
