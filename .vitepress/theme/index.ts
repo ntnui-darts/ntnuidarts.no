@@ -13,8 +13,6 @@ export default {
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'home-hero-image': isDesktop ? () => h(YouTubeDesktop) : undefined,
-      'home-hero-before': !isDesktop ? () => h(YouTubeMobile) : undefined,
     })
   },
   enhanceApp({ app, router, siteData }) {
