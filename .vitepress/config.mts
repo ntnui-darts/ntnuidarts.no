@@ -34,7 +34,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ntnui-darts' },
       // TODO: Create and link instagram account
-      { icon: 'instagram', link: 'https://github.com/ntnui-darts' },
+      { icon: 'instagram', link: 'https://instagram.com/ntnuidarts' },
     ],
   },
 });
