@@ -9,7 +9,7 @@ If you have any questions regarding NTNUI Darts or darts in general, feel free t
 
 - [NTNUI Group Page](https://medlem.ntnui.no/groups/darts/)
 - [GitHub](https://github.com/ntnui-darts)
-<!-- - [Instagram](https://github.com/ntnui-darts) -->
+- [Instagram](https://instagram.com/ntnuidarts)
 
 ## Board Members
 
