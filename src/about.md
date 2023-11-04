@@ -9,7 +9,7 @@ If you have any questions regarding NTNUI Darts or darts in general, feel free t
 
 - [NTNUI Group Page](https://medlem.ntnui.no/groups/darts/)
 - [GitHub](https://github.com/ntnui-darts)
-<!-- - [Instagram](https://github.com/ntnui-darts) -->
+- [Instagram](https://instagram.com/ntnuidarts)
 
 ## Board Members
 
@@ -17,10 +17,8 @@ If you have any questions regarding NTNUI Darts or darts in general, feel free t
 | -------------- | -------------------------- | ------------------------- |
 | Leader         | Gregor Moe                 | darts-leder@ntnui.no      |
 | Deputy Leader  | Eric Niclas Alexander Mård | darts-nestleder@ntnui.no  |
-| Cashier        | Magne Tenstad              | darts-kasserer@ntnui.no   |
-| Social Media   | Mikkel Nes                 | darts-sosial@ntnui.no*    |
-| Tournaments    | Ludvik Hembre              | darts-turnering@ntnui.no* |
-| Inventory      | Nikolay Hiller Klausen     | darts-material@ntnui.no*  |
-| Parasports     | Stian Alseth               | darts-para@ntnui.no*      |
-
-> *not currently available.
+| Cashier        | Nikolay Hiller Klausen     | darts-kasserer@ntnui.no   |
+| Marketing      | Mikkel Nes                 | darts-sosial@ntnui.no     |
+| Tournaments    | Ludvik Hembre              | darts-turnering@ntnui.no  |
+| IT and design  | Magne Tenstad              | darts-it@ntnui.no         |
+| Parasports     | Stian Alseth               | darts-para@ntnui.no       |
