@@ -1,15 +1,15 @@
-import { defineConfig } from 'vitepress';
+import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'NTNUI Darts',
   description: 'Information and news about NTNUI Darts',
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/ntnui-darts.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/ntnui-darts-text.svg' }],
   ],
   srcDir: './src',
   themeConfig: {
-    logo: '/ntnui-darts.png',
+    logo: '/ntnui-darts-text.svg',
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
@@ -37,4 +37,4 @@ export default defineConfig({
       { icon: 'instagram', link: 'https://instagram.com/ntnuidarts' },
     ],
   },
-});
+})

@@ -10,6 +10,9 @@ hero:
     - theme: brand
       text: Join us!
       link: /join
+  image:
+    src: /ntnui-darts.png
+    alt: NTNUI Darts
     # - theme: alt
     #   text: API Examples
     #   link: /api-examples
