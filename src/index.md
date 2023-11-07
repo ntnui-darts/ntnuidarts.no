@@ -11,7 +11,7 @@ hero:
       text: Join us!
       link: /join
   image:
-    src: /ntnui-darts.png
+    src: /ntnui-darts-512.png
     alt: NTNUI Darts
     # - theme: alt
     #   text: API Examples
