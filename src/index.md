@@ -39,3 +39,9 @@ features:
     details: Our handcrafted darts-tracking app
     link: /darts-quest
 ---
+
+<script setup>
+  import GamesChart from './components/GamesChart.vue'
+</script>
+
+<GamesChart/>

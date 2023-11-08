@@ -2,9 +2,16 @@
   "scripts": {
     "dev": "vitepress dev .",
     "build": "vitepress build .",
-    "preview": "vitepress preview ."
+    "preview": "vitepress preview .",
+    "supabase": "supabase gen types typescript --project-id euetpcqmwfdwvbjdqufo --schema public > src/types/supabase.ts"
   },
   "devDependencies": {
+    "supabase": "^1.110.1",
     "vitepress": "^1.0.0-rc.24"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "chart.js": "^4.4.0",
+    "chartjs-adapter-date-fns": "^3.0.0"
   }
 }
