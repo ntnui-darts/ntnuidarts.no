@@ -1,5 +1,5 @@
 <template>
-  <Chart :show-smooth-button="false" :datasets="datasets"></Chart>
+  <Chart :show-smooth-button="true" :datasets="datasets"></Chart>
 </template>
 
 <script setup lang="ts">
@@ -11,31 +11,33 @@ import { supabase } from '../scripts/supabase'
 const datasets = ref<Dataset[]>([])
 
 onMounted(async () => {
-  const types = await supabase
+  const gamesData = await supabase
     .from('games')
     .select('type, createdAt')
     .order('createdAt')
-  if (types.data) {
-    const map = new Map<string, Map<string, number>>()
-    types.data.forEach((data) => {
-      const dateString = data.createdAt.split('T')[0]
-      if (!map.has(data.type)) {
-        map.set(data.type, new Map())
-      }
-      let subMap = map.get(data.type)
-      if (!subMap) {
-        subMap = new Map()
-        map.set(data.type, subMap)
-      }
-      subMap.set(dateString, (subMap.get(dateString) ?? 0) + 1)
+
+  if (gamesData.data) {
+    gamesData.data.forEach((data) => {
+      data.createdAt = data.createdAt.split('T')[0]
     })
-    datasets.value = [...map.entries()].map(([gameType, subMap]) => {
+
+    const dateStrings = [
+      ...new Set(gamesData.data.map((data) => data.createdAt)),
+    ]
+    const gameTypes = [...new Set(gamesData.data.map((data) => data.type))]
+
+    datasets.value = gameTypes.map((gameType) => {
       return {
         label: gameType,
-        data: [...subMap.entries()].map(([dateString, count]) => ({
-          x: new Date(dateString),
-          y: count,
-        })),
+        data: dateStrings.map((dateString) => {
+          const count = gamesData.data.filter(
+            (data) => data.type == gameType && data.createdAt == dateString
+          ).length
+          return {
+            x: new Date(dateString),
+            y: count,
+          }
+        }),
       }
     })
   }

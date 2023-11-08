@@ -1,12 +1,12 @@
 <template>
-  <div style="position: relative; width: auto; height: 500px">
+  <div style="position: relative; width: auto; height: 500px; margin-top: 4em">
     <button
       v-if="showSmoothButton"
       style="position: absolute; right: 0; top: -3em"
       :class="{ selected: smoothEnabled }"
       @click="smoothEnabled = !smoothEnabled"
     >
-      Smooth
+      Toggle Smoothing
     </button>
     <canvas ref="chartElement"></canvas>
   </div>
@@ -71,3 +71,17 @@ watch(
   () => buildChart()
 )
 </script>
+
+<style scoped>
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 0.8em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: white;
+  background-color: #1a1a1a;
+  cursor: pointer;
+}
+</style>
