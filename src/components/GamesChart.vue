@@ -13,9 +13,11 @@ const gameTypesDataset = ref<Dataset[]>([])
 const usersDataset = ref<Dataset[]>([])
 
 onMounted(async () => {
+  var ms = new Date().getTime() - 1000 * 60 * 60 * 24 * 28
   const gamesData = await supabase
     .from('legs')
     .select('type, createdAt, userId, users (id, name)')
+    .gt('createdAt', new Date(ms).toISOString())
     .order('createdAt')
 
   if (gamesData.data) {
@@ -29,7 +31,10 @@ onMounted(async () => {
     const gameTypes = [...new Set(gamesData.data.map((data) => data.type))]
     const userNames = [
       ...new Set(gamesData.data.map((data) => data.users?.name ?? 'Unknown')),
-    ]
+    ].filter(
+      (name) =>
+        gamesData.data.filter((data) => data.users?.name == name).length > 20
+    )
 
     gameTypesDataset.value = gameTypes.map((gameType) => {
       return {
