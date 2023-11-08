@@ -1,5 +1,6 @@
 <template>
-  <Chart :show-smooth-button="true" :datasets="datasets"></Chart>
+  <Chart :show-smooth-button="true" :datasets="gameTypesDataset"></Chart>
+  <Chart :show-smooth-button="true" :datasets="usersDataset"></Chart>
 </template>
 
 <script setup lang="ts">
@@ -8,12 +9,13 @@ import { onMounted, ref } from 'vue'
 import { Dataset } from './chart'
 import { supabase } from '../scripts/supabase'
 
-const datasets = ref<Dataset[]>([])
+const gameTypesDataset = ref<Dataset[]>([])
+const usersDataset = ref<Dataset[]>([])
 
 onMounted(async () => {
   const gamesData = await supabase
-    .from('games')
-    .select('type, createdAt')
+    .from('legs')
+    .select('type, createdAt, userId, users (id, name)')
     .order('createdAt')
 
   if (gamesData.data) {
@@ -25,13 +27,31 @@ onMounted(async () => {
       ...new Set(gamesData.data.map((data) => data.createdAt)),
     ]
     const gameTypes = [...new Set(gamesData.data.map((data) => data.type))]
+    const userNames = [
+      ...new Set(gamesData.data.map((data) => data.users?.name ?? 'Unknown')),
+    ]
 
-    datasets.value = gameTypes.map((gameType) => {
+    gameTypesDataset.value = gameTypes.map((gameType) => {
       return {
         label: gameType,
         data: dateStrings.map((dateString) => {
           const count = gamesData.data.filter(
             (data) => data.type == gameType && data.createdAt == dateString
+          ).length
+          return {
+            x: new Date(dateString),
+            y: count,
+          }
+        }),
+      }
+    })
+
+    usersDataset.value = userNames.map((name) => {
+      return {
+        label: name,
+        data: dateStrings.map((dateString) => {
+          const count = gamesData.data.filter(
+            (data) => data.users?.name == name && data.createdAt == dateString
           ).length
           return {
             x: new Date(dateString),
