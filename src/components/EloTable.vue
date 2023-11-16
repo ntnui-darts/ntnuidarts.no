@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; justify-content: center">
-    <table style="width: 90%">
+    <table style="width: 90%; max-width: 900px">
       <thead>
         <th>Name</th>
         <th>X01</th>
