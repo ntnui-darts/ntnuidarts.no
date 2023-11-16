@@ -42,6 +42,15 @@ features:
 
 <script setup>
   import GamesChart from './components/GamesChart.vue'
+  import EloTable from './components/EloTable.vue'
 </script>
+
+<br>
+<br>
+
+<EloTable/>
+
+<br>
+<br>
 
 <GamesChart/>
