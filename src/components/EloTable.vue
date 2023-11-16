@@ -17,7 +17,9 @@
             <span v-if="typeof item == 'string'"
               >{{ i + 1 }}. {{ stringMaxLength(item, 12) }}</span
             >
-            <span v-if="typeof item == 'number'">{{ Math.round(item) }}</span>
+            <span v-if="typeof item == 'number'">{{
+              Math.round(item) == initialElo ? '-' : Math.round(item)
+            }}</span>
           </td>
         </tr>
       </tbody>
