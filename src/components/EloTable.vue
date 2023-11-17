@@ -43,10 +43,13 @@ const stringMaxLength = (str: string | undefined, n: number) => {
 }
 
 onMounted(async () => {
-  const eloData = await supabase.from('elo').select('*, users (id, name)')
+  const eloData = await supabase
+    .from('elo')
+    .select('*, users (id, name, visible)')
   rows.value = []
   if (eloData.data) {
     eloData.data.forEach((userElo) => {
+      if (!userElo.users?.visible) return
       rows.value.push([
         userElo.users?.name,
         userElo.x01,
