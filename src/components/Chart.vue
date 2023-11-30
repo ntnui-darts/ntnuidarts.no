@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative; width: auto; height: 500px; margin-top: 4em">
+  <div style="position: relative; width: auto; height: 500px; margin-top: 1em">
     <button
       v-if="showSmoothButton"
       style="position: absolute; right: 0; top: -3em"
@@ -47,7 +47,7 @@ const buildChart = async () => {
   }
 
   chart = new Chart(chartElement.value, {
-    type: 'line',
+    type: 'bar',
     data: {
       datasets,
     },
@@ -55,7 +55,11 @@ const buildChart = async () => {
       maintainAspectRatio: false,
       scales: {
         x: {
-          type: 'time',
+          type: 'timeseries',
+          stacked: true,
+        },
+        y: {
+          stacked: true,
         },
       },
     },

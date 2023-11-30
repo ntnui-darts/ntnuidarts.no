@@ -1,6 +1,13 @@
 <template>
-  <Chart :show-smooth-button="true" :datasets="gameTypesDataset"></Chart>
-  <Chart :show-smooth-button="true" :datasets="usersDataset"></Chart>
+  <h1 style="text-align: center; font-size: larger">
+    Number of games played, by game type
+  </h1>
+  <Chart :show-smooth-button="false" :datasets="gameTypesDataset"></Chart>
+  <br /><br />
+  <h1 style="text-align: center; font-size: larger">
+    Number of games played, by player
+  </h1>
+  <Chart :show-smooth-button="false" :datasets="usersDataset"></Chart>
 </template>
 
 <script setup lang="ts">
@@ -8,6 +15,7 @@ import Chart from './Chart.vue'
 import { onMounted, ref } from 'vue'
 import { Dataset } from './chart'
 import { supabase } from '../scripts/supabase'
+import { startOfWeek } from 'date-fns'
 
 const gameTypesDataset = ref<Dataset[]>([])
 const usersDataset = ref<Dataset[]>([])
@@ -17,12 +25,12 @@ onMounted(async () => {
   const gamesData = await supabase
     .from('legs')
     .select('type, createdAt, userId, users (id, name)')
-    .gt('createdAt', new Date(ms).toISOString())
+    //.gt('createdAt', new Date(ms).toISOString())
     .order('createdAt')
 
   if (gamesData.data) {
     gamesData.data.forEach((data) => {
-      data.createdAt = data.createdAt.split('T')[0]
+      data.createdAt = startOfWeek(new Date(data.createdAt)).toISOString()
     })
 
     const dateStrings = [
