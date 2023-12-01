@@ -10,7 +10,7 @@
     "
   >
     <h1 style="text-align: center; font-size: larger">Elo Rating</h1>
-    <p>⚔️ X01, 🕑 Round the Clock, 🐱‍👤 Killer, 🪓 Skovhugger, 🦗 Cricket</p>
+    <p>⚔️ X01, 🕑 Round the Clock, 🧛 Killer, 🪓 Skovhugger, 🦗 Cricket</p>
     <br />
     <br />
     <div
@@ -26,7 +26,7 @@
           <th>Name</th>
           <th>⚔️</th>
           <th>🕑</th>
-          <th>🐱‍👤</th>
+          <th>🧛</th>
           <th>🪓</th>
           <th>🦗</th>
         </thead>
