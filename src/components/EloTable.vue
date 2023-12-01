@@ -1,29 +1,57 @@
 <template>
-  <div style="display: flex; justify-content: center">
-    <table style="width: 90%; max-width: 900px">
-      <thead>
-        <th>Name</th>
-        <th>X01</th>
-        <th>RTC</th>
-        <th>Killer</th>
-        <th>Skov.</th>
-      </thead>
-      <tbody>
-        <tr v-for="(row, i) in rows">
-          <td
-            v-for="item in row.slice(0, 5)"
-            :style="{ 'text-align': typeof item == 'number' ? 'end' : 'start' }"
-          >
-            <span v-if="typeof item == 'string'"
-              >{{ i + 1 }}. {{ stringMaxLength(item, 12) }}</span
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 900px;
+      padding: 1em;
+      margin: auto;
+    "
+  >
+    <h1 style="text-align: center; font-size: larger">Elo Rating</h1>
+    <p>⚔️ X01, 🕑 Round the Clock, 🐱‍👤 Killer, 🪓 Skovhugger, 🦗 Cricket</p>
+    <br />
+    <br />
+    <div
+      v-for="[rows, title] in [
+        [activeRows, 'Active Players'],
+        [inactiveRows, 'Inactive Players'],
+      ]"
+      style="width: 100%"
+    >
+      <h1 style="text-align: center; font-size: medium">{{ title }}</h1>
+      <table style="width: 100%">
+        <thead>
+          <th>Name</th>
+          <th>⚔️</th>
+          <th>🕑</th>
+          <th>🐱‍👤</th>
+          <th>🪓</th>
+          <th>🦗</th>
+        </thead>
+        <tbody>
+          <tr v-for="(row, i) in rows">
+            <td
+              v-for="item in row.slice(0, 6)"
+              :style="{
+                'text-align': typeof item == 'number' ? 'end' : 'start',
+              }"
             >
-            <span v-if="typeof item == 'number'">{{
-              Math.round(item) == initialElo ? '-' : Math.round(item)
-            }}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <span v-if="typeof item == 'string'"
+                >{{ i + 1 + (rows == inactiveRows ? activeRows.length : 0) }}.
+                {{ stringMaxLength(item, 12) }}</span
+              >
+              <span v-if="typeof item == 'number'">{{
+                item == initialElo ? '-' : Math.round(item)
+              }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <br />
+    </div>
   </div>
 </template>
 
@@ -31,7 +59,8 @@
 import { onMounted, ref } from 'vue'
 import { supabase } from '../scripts/supabase'
 
-const rows = ref<unknown[][]>([])
+const activeRows = ref<unknown[][]>([])
+const inactiveRows = ref<unknown[][]>([])
 const initialElo = 1000
 
 const stringMaxLength = (str: string | undefined, n: number) => {
@@ -43,27 +72,37 @@ const stringMaxLength = (str: string | undefined, n: number) => {
 }
 
 onMounted(async () => {
-  const eloData = await supabase
+  const { data } = await supabase
     .from('elo')
     .select('*, users (id, name, visible)')
-  rows.value = []
-  if (eloData.data) {
-    eloData.data.forEach((userElo) => {
-      if (!userElo.users?.visible) return
-      rows.value.push([
-        userElo.users?.name,
-        userElo.x01,
-        userElo.rtc,
-        userElo.killer,
-        userElo.skovhugger,
-        ((userElo.x01 ?? initialElo) +
-          (userElo.rtc ?? initialElo) +
-          (userElo.killer ?? initialElo) +
-          (userElo.skovhugger ?? initialElo)) /
-          4,
-      ])
-    })
+
+  if (!data) return
+
+  activeRows.value = []
+  inactiveRows.value = []
+  for (const userElo of data) {
+    if (!userElo.users?.visible) continue
+    const { count } = await supabase
+      .from('legs')
+      .select('userId', { count: 'estimated', head: true })
+      .eq('userId', userElo.id)
+
+    const rows = (count ?? 0) >= 20 ? activeRows : inactiveRows
+
+    rows.value.push([
+      userElo.users?.name,
+      userElo.x01,
+      userElo.rtc,
+      userElo.killer,
+      userElo.skovhugger,
+      userElo.cricket,
+      (userElo.x01 ?? initialElo) +
+        (userElo.rtc ?? initialElo) +
+        (userElo.killer ?? initialElo) +
+        (userElo.skovhugger ?? initialElo) +
+        (userElo.cricket ?? initialElo),
+    ])
+    rows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
   }
-  rows.value.sort((a, b) => (b[5] as number) - (a[5] as number))
 })
 </script>

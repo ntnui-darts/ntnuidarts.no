@@ -25,7 +25,6 @@ onMounted(async () => {
   const gamesData = await supabase
     .from('legs')
     .select('type, createdAt, userId, users (id, name)')
-    //.gt('createdAt', new Date(ms).toISOString())
     .order('createdAt')
 
   if (gamesData.data) {
