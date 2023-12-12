@@ -21,7 +21,6 @@ const gameTypesDataset = ref<Dataset[]>([])
 const usersDataset = ref<Dataset[]>([])
 
 onMounted(async () => {
-  var ms = new Date().getTime() - 1000 * 60 * 60 * 24 * 28
   const gamesData = await supabase
     .from('legs')
     .select('type, createdAt, userId, users (id, name)')
