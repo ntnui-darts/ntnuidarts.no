@@ -82,27 +82,28 @@ onMounted(async () => {
   inactiveRows.value = []
   for (const userElo of data) {
     if (!userElo.users?.visible) continue
-    const { count } = await supabase
+    supabase
       .from('legs')
       .select('userId', { count: 'estimated', head: true })
       .eq('userId', userElo.id)
+      .then(({ count }) => {
+        const rows = (count ?? 0) >= 20 ? activeRows : inactiveRows
 
-    const rows = (count ?? 0) >= 20 ? activeRows : inactiveRows
-
-    rows.value.push([
-      userElo.users?.name,
-      userElo.x01,
-      userElo.rtc,
-      userElo.killer,
-      userElo.skovhugger,
-      userElo.cricket,
-      (userElo.x01 ?? initialElo) +
-        (userElo.rtc ?? initialElo) +
-        (userElo.killer ?? initialElo) +
-        (userElo.skovhugger ?? initialElo) +
-        (userElo.cricket ?? initialElo),
-    ])
-    rows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
+        rows.value.push([
+          userElo.users?.name,
+          userElo.x01,
+          userElo.rtc,
+          userElo.killer,
+          userElo.skovhugger,
+          userElo.cricket,
+          (userElo.x01 ?? initialElo) +
+            (userElo.rtc ?? initialElo) +
+            (userElo.killer ?? initialElo) +
+            (userElo.skovhugger ?? initialElo) +
+            (userElo.cricket ?? initialElo),
+        ])
+        rows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
+      })
   }
 })
 </script>
