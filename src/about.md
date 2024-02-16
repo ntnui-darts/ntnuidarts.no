@@ -11,7 +11,7 @@ If you have any questions regarding NTNUI Darts or darts in general, feel free t
 - [GitHub](https://github.com/ntnui-darts)
 - [Instagram](https://instagram.com/ntnuidarts)
 
-<iframe src='https://www.instagram.com/ntnuidarts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='>
+<iframe src='https://www.instagram.com/ntnuidarts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='></iframe>
 
 ## Board Members
 
