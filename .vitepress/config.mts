@@ -15,7 +15,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Join', link: '/join' },
       { text: 'News', link: '/news' },
-      { text: 'Events', link: '/events' },
+      { text: 'Activities', link: '/activities' },
       { text: 'Shop', link: '/shop' },
       { text: 'About', link: '/about' },
       { text: 'darts.quest', link: '/darts-quest' },
