@@ -22,10 +22,10 @@ features:
     icon: 📰
     details: What's going on with NTNUI Darts
     link: /news
-  - title: Upcoming Events
+  - title: Activities
     icon: 📆
     details: Don't miss our next tournament
-    link: /events
+    link: /activities
   - title: Shop
     icon: 🛍️
     details: Get our coolest merch
