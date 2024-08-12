@@ -2,12 +2,21 @@
   <h1 style="text-align: center; font-size: larger">
     Number of games, by game type
   </h1>
-  <Chart :show-smooth-button="false" :datasets="gameTypesDataset"></Chart>
+  <Chart :datasets="gameTypesDataset" :options="{}"></Chart>
   <br /><br />
   <h1 style="text-align: center; font-size: larger">
     Number of games, by player
   </h1>
-  <Chart :show-smooth-button="false" :datasets="usersDataset"></Chart>
+  <Chart
+    :datasets="usersDataset"
+    :options="{
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    }"
+  ></Chart>
 </template>
 
 <script setup lang="ts">
