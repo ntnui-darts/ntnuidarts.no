@@ -16,7 +16,7 @@
     <div
       v-for="[rows, title] in [
         [activeRows, 'Active Players'],
-        [inactiveRows, 'Inactive Players'],
+        // [inactiveRows, 'Inactive Players'],
       ]"
       style="width: 100%"
     >
@@ -82,6 +82,7 @@ onMounted(async () => {
   inactiveRows.value = []
   for (const userElo of data) {
     if (!userElo.users?.visible) continue
+    // TODO, Magne: Cache 'active' flag?
     supabase
       .from('legs')
       .select('userId', { count: 'estimated', head: true })
