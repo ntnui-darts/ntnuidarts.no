@@ -71,40 +71,43 @@ const stringMaxLength = (str: string | undefined, n: number) => {
   return str
 }
 
+function daysBetween(first: Date, second: Date) {
+  return Math.round(
+    (second.getTime() - first.getTime()) / (1000 * 60 * 60 * 24)
+  )
+}
+
 onMounted(async () => {
   const { data } = await supabase
     .from('elo')
-    .select('*, users (id, name, visible)')
+    .select('*, users (id, name, visible, lastActive)')
 
   if (!data) return
 
   activeRows.value = []
-  inactiveRows.value = []
-  for (const userElo of data) {
-    if (!userElo.users?.visible) continue
-    // TODO, Magne: Cache 'active' flag?
-    supabase
-      .from('legs')
-      .select('userId', { count: 'estimated', head: true })
-      .eq('userId', userElo.id)
-      .then(({ count }) => {
-        const rows = (count ?? 0) >= 20 ? activeRows : inactiveRows
+  const now = new Date()
 
-        rows.value.push([
-          userElo.users?.name,
-          userElo.x01,
-          userElo.rtc,
-          userElo.killer,
-          userElo.skovhugger,
-          userElo.cricket,
-          (userElo.x01 ?? initialElo) +
-            (userElo.rtc ?? initialElo) +
-            (userElo.killer ?? initialElo) +
-            (userElo.skovhugger ?? initialElo) +
-            (userElo.cricket ?? initialElo),
-        ])
-        rows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
-      })
+  for (const userElo of data) {
+    if (!userElo.users) continue
+    if (!userElo.users.visible) continue
+    if (!userElo.users.lastActive) continue
+    if (daysBetween(new Date(userElo.users.lastActive), now) > 14) continue
+
+    activeRows.value.push([
+      userElo.users?.name,
+      userElo.x01,
+      userElo.rtc,
+      userElo.killer,
+      userElo.skovhugger,
+      userElo.cricket,
+      (userElo.x01 ?? initialElo) +
+        (userElo.rtc ?? initialElo) +
+        (userElo.killer ?? initialElo) +
+        (userElo.skovhugger ?? initialElo) +
+        (userElo.cricket ?? initialElo),
+    ])
   }
+
+  activeRows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
 })
 </script>
