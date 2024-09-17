@@ -90,8 +90,8 @@ onMounted(async () => {
   for (const userElo of data) {
     if (!userElo.users) continue
     if (!userElo.users.visible) continue
-    if (!userElo.users.lastActive) continue
-    if (daysBetween(new Date(userElo.users.lastActive), now) > 14) continue
+    if (!userElo.lastUpdate) continue
+    if (daysBetween(new Date(userElo.lastUpdate), now) > 14) continue
 
     activeRows.value.push([
       userElo.users?.name,
