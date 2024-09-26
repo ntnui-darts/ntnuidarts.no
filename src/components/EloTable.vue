@@ -14,21 +14,21 @@
     <br />
     <br />
     <div
-      v-for="[rows, title] in [
-        [activeRows, 'Active Players'],
-        // [inactiveRows, 'Inactive Players'],
-      ]"
+      v-for="[rows, title] in [[sortedRows, 'Active Players']]"
       style="width: 100%"
     >
       <h1 style="text-align: center; font-size: medium">{{ title }}</h1>
       <table style="width: 100%">
         <thead>
           <th>Name</th>
-          <th>⚔️</th>
-          <th>🕑</th>
-          <th>🧛</th>
-          <th>🪓</th>
-          <th>🦗</th>
+          <th
+            v-for="[sb, icon] in columns"
+            class="pointer"
+            :class="{ selected: sb == sortBy }"
+            @click="setSortBy(sb)"
+          >
+            {{ icon }}
+          </th>
         </thead>
         <tbody>
           <tr v-for="(row, i) in rows">
@@ -39,11 +39,10 @@
               }"
             >
               <span v-if="typeof item == 'string'"
-                >{{ i + 1 + (rows == inactiveRows ? activeRows.length : 0) }}.
-                {{ stringMaxLength(item, 12) }}</span
+                >{{ i + 1 }}. {{ stringMaxLength(item, 12) }}</span
               >
               <span v-if="typeof item == 'number'">{{
-                item == initialElo ? '-' : Math.round(item)
+                item == initialElo || item == 0 ? '-' : Math.round(item)
               }}</span>
             </td>
           </tr>
@@ -56,12 +55,28 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { supabase } from '../scripts/supabase'
 
+enum SortBy {
+  x01 = 1,
+  rtc,
+  killer,
+  skovhugger,
+  cricket,
+  mean,
+}
 const activeRows = ref<unknown[][]>([])
-const inactiveRows = ref<unknown[][]>([])
 const initialElo = 1000
+const sortBy = ref(SortBy.mean)
+
+const columns = [
+  [SortBy.x01, '⚔️'],
+  [SortBy.rtc, '🕑'],
+  [SortBy.killer, '🧛'],
+  [SortBy.skovhugger, '🪓'],
+  [SortBy.cricket, '🦗'],
+] as const
 
 const stringMaxLength = (str: string | undefined, n: number) => {
   if (!str) return str
@@ -95,11 +110,11 @@ onMounted(async () => {
 
     activeRows.value.push([
       userElo.users?.name,
-      userElo.x01,
-      userElo.rtc,
-      userElo.killer,
-      userElo.skovhugger,
-      userElo.cricket,
+      userElo.x01 === 1000 ? 0 : userElo.x01,
+      userElo.rtc === 1000 ? 0 : userElo.rtc,
+      userElo.killer === 1000 ? 0 : userElo.killer,
+      userElo.skovhugger === 1000 ? 0 : userElo.skovhugger,
+      userElo.cricket === 1000 ? 0 : userElo.cricket,
       (userElo.x01 ?? initialElo) +
         (userElo.rtc ?? initialElo) +
         (userElo.killer ?? initialElo) +
@@ -107,7 +122,29 @@ onMounted(async () => {
         (userElo.cricket ?? initialElo),
     ])
   }
+})
 
-  activeRows.value.sort((a, b) => (b.at(-1) as number) - (a.at(-1) as number))
+const setSortBy = (s: SortBy) => {
+  if (sortBy.value == s) {
+    sortBy.value = SortBy.mean
+  } else {
+    sortBy.value = s
+  }
+}
+
+const sortedRows = computed(() => {
+  return activeRows.value.sort(
+    (a, b) => (b.at(sortBy.value) as number) - (a.at(sortBy.value) as number)
+  )
 })
 </script>
+
+<style scoped>
+.pointer {
+  cursor: pointer;
+}
+.selected {
+  background-color: #36445f66;
+  border-radius: 6px;
+}
+</style>
