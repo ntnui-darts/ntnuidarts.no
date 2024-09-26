@@ -18,10 +18,10 @@ hero:
     #   link: /api-examples
 
 features:
-  - title: News
-    icon: 📰
-    details: What's going on with NTNUI Darts
-    link: /news
+  - title: About
+    icon: 🧭
+    details: General information, links and board members
+    link: /about
   - title: Activities
     icon: 📆
     details: Don't miss our next tournament
@@ -30,10 +30,10 @@ features:
     icon: 🛍️
     details: Get our coolest merch
     link: /shop
-  - title: About
-    icon: 🧭
-    details: General information, links and board members
-    link: /about
+  - title: News
+    icon: 📰
+    details: What's going on with NTNUI Darts
+    link: /news
   - title: darts.quest
     icon: 📱
     details: Our handcrafted darts-tracking app
