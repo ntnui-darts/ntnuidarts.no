@@ -2,8 +2,9 @@
 
 We are NTNUI Darts! 🎯
 
-A newly established activity group in NTNUI with ambitions to create a good environment for students interested in darts, as well as creating new darts talents.
-If you have any questions regarding NTNUI Darts or darts in general, feel free to send an email to one of us in the board.
+We aim to create a friendly arena for darts enthusiasts among students in Trondheim!
+
+We use Slack as our information channel. Send an email to darts@ntnui.no or DM our Instagram: @ntnuidarts to receive an invitation, or if you have any other questions.
 
 ## Links
 
