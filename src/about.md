@@ -24,4 +24,4 @@ We use Slack as our information channel. Send an email to darts@ntnui.no or DM o
 | IT             | Magne Tenstad              | <darts-it@ntnui.no>        |
 | Material       | Ingrid Schrader            | <darts-material@ntnui.no>  |
 | Parasports     | Stian Alseth               | <darts-para@ntnui.no>      |
-| HMS            | Nikolay Klausen            | <darts-hms@ntnui.no>       |
+| HSE            | Nikolay Klausen            | <darts-hms@ntnui.no>       |
