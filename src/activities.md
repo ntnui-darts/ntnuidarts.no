@@ -1,7 +1,7 @@
 # Activities
 
-## 2024, Autumn Semester
+## 2025, Spring Semester
 
-We throw darts every Tuesday from 19:00-22:00 at Dora 1 Bowling og Biljard. Feel free to stop by!
+We throw darts every Monday from 17:00-21:00 at Dora 1 Bowling og Biljard. Feel free to stop by!
 
-Updated 26.09.2024
+Updated 13.01.2025
