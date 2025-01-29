@@ -51,7 +51,7 @@
                       p.option?.value == product.option?.value
                   )
                   if (existing) {
-                    existing.count += 1
+                    scrollToCart()
                   } else {
                     cart.push({
                       id: product.id,
@@ -68,7 +68,7 @@
                     p.id == product.id &&
                     p.option?.value == product.option?.value
                 )
-                  ? 'In cart'
+                  ? 'View cart'
                   : 'Add to cart'
               }}
             </button>
@@ -88,7 +88,7 @@
     </template>
   </div>
 
-  <h2>
+  <h2 id="h2-cart">
     Cart
     <template v-if="cart.length > 0">
       :
@@ -162,6 +162,13 @@ const products = ref<ProductWithOption[]>(
       } satisfies ProductWithOption)
   )
 )
+
+const scrollToCart = () => {
+  const cartH2 = document.querySelector('#h2-cart')
+  if (cartH2) {
+    cartH2.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <style>
