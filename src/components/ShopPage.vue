@@ -1,11 +1,11 @@
 <template>
   <h2>Products</h2>
 
-  <div style="display: flex; flex-direction: column; gap: 1em">
+  <div style="display: flex; flex-direction: column; gap: 2em">
     <template v-for="product in products">
       <div
         class="product"
-        style="display: flex; justify-content: space-between; gap: 1em"
+        style="display: flex; flex-direction: column; gap: 1em"
       >
         <div
           style="
@@ -19,70 +19,70 @@
             <h4>{{ product.name }}</h4>
             <span>{{ product.price }} NOK</span>
           </div>
-
-          <div style="display: flex; justify-content: space-between">
-            <div v-if="product.options.length > 0">
-              <select
-                name="model"
-                :id="`select-${product.id}`"
-                @input="(e) => {
-              product.option = product.options.find(p => p.value == (e.target as HTMLSelectElement).value) ?? null
-            }"
-              >
-                <option v-for="option in product.options" :value="option.value">
-                  {{ option.text }}
-                </option>
-              </select>
-            </div>
-
-            <button
-              :class="{
-                'btn-primary': !cart.find(
-                  (p) =>
-                    p.id == product.id &&
-                    p.option?.value == product.option?.value
-                ),
-              }"
-              @click="
-                () => {
-                  const existing = cart.find(
-                    (p) =>
-                      p.id == product.id &&
-                      p.option?.value == product.option?.value
-                  )
-                  if (existing) {
-                    scrollToCart()
-                  } else {
-                    cart.push({
-                      id: product.id,
-                      option: product.option,
-                      count: 1,
-                    })
-                  }
-                }
-              "
-            >
-              {{
-                cart.find(
-                  (p) =>
-                    p.id == product.id &&
-                    p.option?.value == product.option?.value
-                )
-                  ? 'View cart'
-                  : 'Add to cart'
-              }}
-            </button>
-          </div>
         </div>
         <div
           style="
             background-color: white;
-            width: 50%;
+            min-width: 200px;
             padding: 1em;
             border-radius: 6px;
           "
         >
           <img :src="product.image" alt="" />
+        </div>
+
+        <div style="display: flex">
+          <div v-if="product.options.length > 0">
+            <select
+              name="model"
+              :id="`select-${product.id}`"
+              @input="(e) => {
+              product.option = product.options.find(p => p.value == (e.target as HTMLSelectElement).value) ?? null
+            }"
+            >
+              <option v-for="option in product.options" :value="option.value">
+                {{ option.text }}
+              </option>
+            </select>
+          </div>
+
+          <div style="flex: 1"></div>
+
+          <button
+            :class="{
+              'btn-primary': !cart.find(
+                (p) =>
+                  p.id == product.id && p.option?.value == product.option?.value
+              ),
+            }"
+            @click="
+              () => {
+                const existing = cart.find(
+                  (p) =>
+                    p.id == product.id &&
+                    p.option?.value == product.option?.value
+                )
+                if (existing) {
+                  scrollToCart()
+                } else {
+                  cart.push({
+                    id: product.id,
+                    option: product.option,
+                    count: 1,
+                  })
+                }
+              }
+            "
+          >
+            {{
+              cart.find(
+                (p) =>
+                  p.id == product.id && p.option?.value == product.option?.value
+              )
+                ? 'View cart'
+                : 'Add to cart'
+            }}
+          </button>
         </div>
       </div>
     </template>
