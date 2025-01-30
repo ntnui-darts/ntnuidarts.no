@@ -48,6 +48,6 @@ export const unisexSizeOptions = [
   },
   {
     text: 'Unisex, XL',
-    value: 'man-xl',
+    value: 'unisex-xl',
   },
 ]
