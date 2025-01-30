@@ -141,9 +141,14 @@
     <template v-if="cart.length == 0">Your cart is empty.</template>
     <div
       style="display: flex; justify-content: space-between; align-items: end"
+      v-if="cart.length > 0"
     >
-      <p>Get 3 stickers for free with your order!</p>
-      <button v-if="cart.length > 0" class="btn-primary">Order</button>
+      <p>
+        Get {{ cart.map((p) => p.count).reduce((a, b) => a + b, 0) }} stickers
+        for free with your order!
+      </p>
+
+      <button class="btn-primary">Order now [not yet available]</button>
     </div>
   </div>
 </template>
