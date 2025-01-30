@@ -1,7 +1,7 @@
 export const manWomanSizeOptions = [
   {
     text: 'Man, Small',
-    value: 'man-xl',
+    value: 'man-small',
   },
   {
     text: 'Man, Medium',
@@ -17,7 +17,7 @@ export const manWomanSizeOptions = [
   },
   {
     text: 'Woman, Small',
-    value: 'woman-xl',
+    value: 'woman-small',
   },
   {
     text: 'Woman, Medium',
@@ -29,14 +29,14 @@ export const manWomanSizeOptions = [
   },
   {
     text: 'Woman, XL',
-    value: 'man-xl',
+    value: 'woman-xl',
   },
 ]
 
 export const unisexSizeOptions = [
   {
     text: 'Unisex, Small',
-    value: 'unisex-xl',
+    value: 'unisex-small',
   },
   {
     text: 'Unisex, Medium',
