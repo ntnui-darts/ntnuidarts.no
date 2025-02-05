@@ -107,9 +107,9 @@
     <template v-for="(product, i) in cart">
       <div
         class="product"
-        style="display: flex; justify-content: space-between"
+        style="display: flex; justify-content: space-between; flex-wrap: wrap"
       >
-        <div>
+        <div style="width: max-content; margin-bottom: 1em">
           <h4>
             {{ productsRaw.find((p) => p.id == product.id)?.name }} :
             {{ productsRaw.find((pr) => pr.id == product.id)?.price }},- NOK x
@@ -117,7 +117,15 @@
           </h4>
           <span>{{ product.option?.text }}</span>
         </div>
-        <div style="display: flex; gap: 1em; align-items: center">
+        <div
+          style="
+            flex: 1;
+            display: flex;
+            gap: 1em;
+            justify-content: end;
+            align-items: center;
+          "
+        >
           <input
             type="number"
             min="1"
