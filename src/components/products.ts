@@ -9,13 +9,15 @@ export type Product = {
 }
 
 export type ProductWithOption = Product & {
-  option: { text: string; value: string } | null
+  option: { text: string; value: string | null }
 }
 
 export type ProductInCart = {
   id: string
-  option: { text: string; value: string } | null
+  name: string
+  option: string | null
   count: number
+  price: number
 }
 
 export const productsRaw = [

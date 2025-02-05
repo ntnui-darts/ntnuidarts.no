@@ -3,10 +3,7 @@
 
   <div style="display: flex; flex-direction: column; gap: 2em">
     <template v-for="product in products">
-      <div
-        class="product"
-        style="display: flex; flex-direction: column; gap: 1em"
-      >
+      <div class="box" style="display: flex; flex-direction: column; gap: 1em">
         <div
           style="
             flex: 1;
@@ -37,7 +34,7 @@
               name="model"
               :id="`select-${product.id}`"
               @input="(e) => {
-              product.option = product.options.find(p => p.value == (e.target as HTMLSelectElement).value) ?? null
+              product.option = product.options.find(p => p.value == (e.target as HTMLSelectElement).value) ?? { text: '', value: null}
             }"
             >
               <option v-for="option in product.options" :value="option.value">
@@ -51,33 +48,14 @@
           <button
             :class="{
               'btn-primary': !cart.find(
-                (p) =>
-                  p.id == product.id && p.option?.value == product.option?.value
+                (p) => p.id == product.id && p.option == product.option.value
               ),
             }"
-            @click="
-              () => {
-                const existing = cart.find(
-                  (p) =>
-                    p.id == product.id &&
-                    p.option?.value == product.option?.value
-                )
-                if (existing) {
-                  scrollToCart()
-                } else {
-                  cart.push({
-                    id: product.id,
-                    option: product.option,
-                    count: 1,
-                  })
-                }
-              }
-            "
+            @click="() => addToCart(product)"
           >
             {{
               cart.find(
-                (p) =>
-                  p.id == product.id && p.option?.value == product.option?.value
+                (p) => p.id == product.id && p.option == product.option.value
               )
                 ? 'View cart'
                 : 'Add to cart'
@@ -88,34 +66,24 @@
     </template>
   </div>
 
-  <h2 id="h2-cart">
+  <h2 id="h2-cart" style="display: flex; justify-content: space-between">
     Cart
-    <template v-if="cart.length > 0">
-      :
-      {{
-        cart
-          .map(
-            (p) =>
-              p.count * (productsRaw.find((pr) => pr.id == p.id)?.price ?? 0)
-          )
-          .reduce((a, b) => (a ?? 0) + (b ?? 0), 0)
-      }},- NOK
-    </template>
+    <span v-if="cart.length > 0">
+      NOK
+      {{ totalPrice }},-
+    </span>
   </h2>
 
   <div style="display: flex; flex-direction: column; gap: 1em">
     <template v-for="(product, i) in cart">
       <div
-        class="product"
+        class="box"
         style="display: flex; justify-content: space-between; flex-wrap: wrap"
       >
         <div style="width: max-content; margin-bottom: 1em">
           <h4>
-            {{ productsRaw.find((p) => p.id == product.id)?.name }} :
-            {{ productsRaw.find((pr) => pr.id == product.id)?.price }},- NOK x
-            {{ product.count }}
+            {{ product.name }}. {{ product.count }} x NOK {{ product.price }},-
           </h4>
-          <span>{{ product.option?.text }}</span>
         </div>
         <div
           style="
@@ -132,9 +100,11 @@
             max="99"
             step="1"
             v-model="product.count"
+            :disabled="orderLoading"
           />
 
           <button
+            :disabled="orderLoading"
             @click="
               () => {
                 cart.splice(i, 1)
@@ -146,23 +116,47 @@
         </div>
       </div>
     </template>
-    <template v-if="cart.length == 0">Your cart is empty.</template>
+    <p v-if="cart.length == 0" class="box">Your cart is empty.</p>
     <div
-      style="display: flex; justify-content: space-between; align-items: end"
+      class="box"
+      style="display: flex; flex-direction: column; gap: 1em"
       v-if="cart.length > 0"
     >
-      <p>
-        Get {{ cart.map((p) => p.count).reduce((a, b) => a + b, 0) }} stickers
-        for free with your order!
-      </p>
+      <input
+        type="text"
+        name="fullname"
+        placeholder="Full name"
+        v-model="name"
+        :disabled="orderLoading"
+      />
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        v-model="email"
+        :disabled="orderLoading"
+      />
 
-      <button class="btn-primary">Order now [not yet available]</button>
+      <span v-if="numberOfFreeStickers > 0">
+        You get
+        {{ numberOfFreeStickers }} sticker(s) for free with your order!
+      </span>
+
+      <button
+        v-if="orderValid"
+        class="btn-primary"
+        @click="onOrder"
+        :disabled="orderLoading"
+      >
+        {{ orderLoading ? 'Loading..' : 'Submit order' }}
+      </button>
     </div>
   </div>
+  <p v-if="apiResponseText.length > 0" class="box">{{ apiResponseText }}</p>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref, toRaw } from 'vue'
 import { ProductInCart, productsRaw, ProductWithOption } from './products'
 
 const cart = ref<ProductInCart[]>([])
@@ -171,10 +165,60 @@ const products = ref<ProductWithOption[]>(
     (p) =>
       ({
         ...p,
-        option: p.options.at(0) ?? null,
+        option: p.options.at(0) ?? { text: '', value: null },
       } satisfies ProductWithOption)
   )
 )
+const name = ref('')
+const email = ref('')
+const apiResponseText = ref('')
+const orderLoading = ref(false)
+
+const isValidEmail = (email: string) => {
+  var re = /\S+@\S+\.\S+/
+  return re.test(email)
+}
+
+const totalPrice = computed(() => {
+  return cart.value
+    .map((p) => p.count * (productsRaw.find((pr) => pr.id == p.id)?.price ?? 0))
+    .reduce((a, b) => (a ?? 0) + (b ?? 0), 0)
+})
+
+const orderValid = computed(() => {
+  if (name.value.length < 3) return false
+  if (!isValidEmail(email.value)) return false
+  if (cart.value.length == 0) return false
+  return true
+})
+
+const numberOfFreeStickers = computed(() => {
+  return cart.value
+    .filter((p) => p.price >= 50)
+    .map((p) => p.count)
+    .reduce((a, b) => a + b, 0)
+})
+
+const addToCart = (product: ProductWithOption) => {
+  apiResponseText.value = ''
+
+  const existing = cart.value.find(
+    (p) => p.id == product.id && p.option == product.option.value
+  )
+  if (existing) {
+    scrollToCart()
+  } else {
+    cart.value.push({
+      id: product.id,
+      name:
+        product.name +
+        (product.option.value ? ` (${product.option.text})` : ''),
+      option: product.option.value,
+      price: productsRaw.find((pr) => pr.id == product.id)?.price ?? 0,
+      count: 1,
+    })
+  }
+}
 
 const scrollToCart = () => {
   const cartH2 = document.querySelector('#h2-cart')
@@ -182,10 +226,57 @@ const scrollToCart = () => {
     cartH2.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const appsScriptApiUrl =
+  'https://script.google.com/macros/s/AKfycbyxsQAP-49TlNQpKfUv7ylEbSbBmylREakvUgU-fnGTp57PhmhDJe__e3WzCQd4xoLdww/exec'
+
+export type Order = {
+  orderId: string
+  name: string
+  email: string
+  products: ProductInCart[]
+  totalPrice: number
+}
+
+const onOrder = async () => {
+  if (!orderValid.value) return
+  orderLoading.value = true
+  const finalProducts = structuredClone(toRaw(cart.value))
+
+  const order: Order = {
+    orderId: crypto.randomUUID().substring(0, 6),
+    email: email.value,
+    name: name.value,
+    products: finalProducts,
+    totalPrice: totalPrice.value,
+  }
+  finalProducts.push({
+    id: 'sticker',
+    name: 'Sticker',
+    option: null,
+    price: 0,
+    count: numberOfFreeStickers.value,
+  })
+  try {
+    const response = await fetch(appsScriptApiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8', // fixes CORS issue
+      },
+      body: JSON.stringify(order),
+    })
+    apiResponseText.value = await response.text()
+    apiResponseText.value = 'Success! Check your email.'
+    cart.value = []
+  } catch (err) {
+    apiResponseText.value = `Something failed. Report the following error to darts-it@ntnui.no: ${err}`
+  }
+  orderLoading.value = false
+}
 </script>
 
 <style>
-.product {
+.box {
   background-color: var(--vp-c-gray-3);
   border-radius: 6px;
   padding: 1em;
@@ -233,5 +324,9 @@ select {
 .btn-primary {
   background-color: rgb(19, 221, 97);
   color: black;
+}
+button:disabled {
+  background-color: #1a1a1a;
+  color: gray;
 }
 </style>
