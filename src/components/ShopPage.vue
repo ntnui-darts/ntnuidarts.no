@@ -265,8 +265,7 @@ const onOrder = async () => {
       },
       body: JSON.stringify(order),
     })
-    apiResponseText.value = await response.text()
-    apiResponseText.value = 'Success! Check your email.'
+    apiResponseText.value = `Success! To complete your purchase, send NOK ${order.totalPrice},- to <VIPPS-LINK> and include order ID ${order.orderId} in the message field. Further details have been sent to you email inbox.`
     cart.value = []
   } catch (err) {
     apiResponseText.value = `Something failed. Report the following error to darts-it@ntnui.no: ${err}`
