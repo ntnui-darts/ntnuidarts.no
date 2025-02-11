@@ -124,7 +124,8 @@
     >
       <input
         type="text"
-        name="fullname"
+        name="name"
+        autocomplete="name"
         placeholder="Full name"
         v-model="name"
         :disabled="orderLoading"
@@ -132,6 +133,7 @@
       <input
         type="text"
         name="email"
+        autocomplete="email"
         placeholder="Email"
         v-model="email"
         :disabled="orderLoading"
