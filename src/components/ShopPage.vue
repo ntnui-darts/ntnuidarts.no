@@ -265,7 +265,7 @@ const onOrder = async () => {
       },
       body: JSON.stringify(order),
     })
-    apiResponseText.value = `Success! To complete your purchase, send NOK ${order.totalPrice},- to <VIPPS-LINK> and include order ID ${order.orderId} in the message field. Further details have been sent to you email inbox.`
+    apiResponseText.value = `Success! To complete your purchase, send NOK ${order.totalPrice},- to Vipps #954519 (https://qr.vipps.no/28/2/05/031/FgKHKVPrM) and include order ID ${order.orderId} in the message field. Further details have been sent to you email inbox.`
     cart.value = []
   } catch (err) {
     apiResponseText.value = `Something failed. Report the following error to darts-it@ntnui.no: ${err}`
