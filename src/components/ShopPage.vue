@@ -158,7 +158,24 @@
       </button>
     </div>
   </div>
-  <p v-if="apiResponseText.length > 0" class="box">{{ apiResponseText }}</p>
+  <p v-if="apiResponse.state != ApiState.unknown" class="box">
+    <template v-if="apiResponse.state == ApiState.success">
+      Success! To complete your purchase, send
+      <b style="text-decoration: underline"
+        >NOK {{ apiResponse.order?.totalPrice }},-</b
+      >
+      to
+      <a href="https://qr.vipps.no/28/2/05/031/FgKHKVPrM">Vipps #954519</a>
+      and include
+      <b style="text-decoration: underline"
+        >order ID {{ apiResponse.order?.orderId }}</b
+      >
+      in the message field. Further details have been sent to you email inbox.
+    </template>
+    <span v-if="apiResponse.state == ApiState.error">{{
+      apiResponse.response
+    }}</span>
+  </p>
 </template>
 
 <script lang="ts" setup>
@@ -175,9 +192,20 @@ const products = ref<ProductWithOption[]>(
       } satisfies ProductWithOption)
   )
 )
+
+enum ApiState {
+  unknown,
+  success,
+  error,
+}
+
 const name = ref('')
 const email = ref('')
-const apiResponseText = ref('')
+const apiResponse = ref({
+  state: ApiState.unknown,
+  response: '',
+  order: null as Order | null,
+})
 const orderLoading = ref(false)
 
 const isValidEmail = (email: string) => {
@@ -206,7 +234,11 @@ const numberOfFreeStickers = computed(() => {
 })
 
 const addToCart = (product: ProductWithOption) => {
-  apiResponseText.value = ''
+  apiResponse.value = {
+    state: ApiState.unknown,
+    response: '',
+    order: null,
+  }
 
   const existing = cart.value.find(
     (p) => p.id == product.id && p.option == product.option.value
@@ -256,13 +288,15 @@ const onOrder = async () => {
     products: finalProducts,
     totalPrice: totalPrice.value,
   }
-  finalProducts.push({
-    id: 'sticker',
-    name: 'Sticker',
-    option: null,
-    price: 0,
-    count: numberOfFreeStickers.value,
-  })
+  if (numberOfFreeStickers.value > 0) {
+    finalProducts.push({
+      id: 'sticker',
+      name: 'Sticker',
+      option: null,
+      price: 0,
+      count: numberOfFreeStickers.value,
+    })
+  }
   try {
     const response = await fetch(appsScriptApiUrl, {
       method: 'POST',
@@ -271,10 +305,18 @@ const onOrder = async () => {
       },
       body: JSON.stringify(order),
     })
-    apiResponseText.value = `Success! To complete your purchase, send NOK ${order.totalPrice},- to Vipps #954519 (https://qr.vipps.no/28/2/05/031/FgKHKVPrM) and include order ID ${order.orderId} in the message field. Further details have been sent to you email inbox.`
+    apiResponse.value = {
+      state: ApiState.success,
+      response: await response.text(),
+      order: order,
+    }
     cart.value = []
   } catch (err) {
-    apiResponseText.value = `Something failed. Report the following error to darts-it@ntnui.no: ${err}`
+    apiResponse.value = {
+      state: ApiState.error,
+      response: `Something failed. Report the following error to darts-it@ntnui.no: ${err}`,
+      order: order,
+    }
   }
   orderLoading.value = false
 }
