@@ -25,7 +25,11 @@
             border-radius: 6px;
           "
         >
-          <img :src="product.image" alt="" />
+          <img
+            :src="product.image"
+            alt=""
+            style="max-height: 400px; margin: auto"
+          />
         </div>
 
         <div style="display: flex">

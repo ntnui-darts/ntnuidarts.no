@@ -56,5 +56,11 @@ export const productsRaw = [
     image: 'products/flights.png',
     options: [],
   },
-  // { name: 'Sticker', price: 10, image: 'products/sticker.png' },
+  {
+    id: 'sticker',
+    name: 'Sticker',
+    price: 10,
+    image: 'products/sticker.png',
+    options: [],
+  },
 ]
