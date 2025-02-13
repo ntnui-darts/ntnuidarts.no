@@ -126,19 +126,23 @@
       style="display: flex; flex-direction: column; gap: 1em"
       v-if="cart.length > 0"
     >
+      <label for="input-name">Name</label>
       <input
         type="text"
+        id="input-name"
         name="name"
         autocomplete="name"
-        placeholder="Full name"
+        placeholder="..."
         v-model="name"
         :disabled="orderLoading"
       />
+      <label for="input-email">Email</label>
       <input
         type="text"
+        id="input-email"
         name="email"
         autocomplete="email"
-        placeholder="Email"
+        placeholder="..."
         v-model="email"
         :disabled="orderLoading"
       />
