@@ -170,7 +170,7 @@
       <b style="text-decoration: underline"
         >order ID {{ apiResponse.order?.orderId }}</b
       >
-      in the message field. Further details have been sent to you email inbox.
+      in the message field. Further details have been sent to your email inbox.
     </template>
     <span v-if="apiResponse.state == ApiState.error">{{
       apiResponse.response
