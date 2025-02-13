@@ -55,7 +55,7 @@ export const manWomanSizeOptions = [
     text: 'Woman, 3XL',
     value: 'woman-3xl',
   },
-]
+] as const
 
 export const unisexSizeOptions = [
   {
@@ -86,4 +86,4 @@ export const unisexSizeOptions = [
     text: 'Unisex, 3XL',
     value: 'unisex-3xl',
   },
-]
+] as const
