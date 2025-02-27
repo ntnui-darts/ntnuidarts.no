@@ -160,7 +160,8 @@
   </div>
   <p v-if="apiResponse.state != ApiState.unknown" class="box">
     <template v-if="apiResponse.state == ApiState.success">
-      Success! To complete your purchase, send
+      Success! ✅ <br />
+      To complete your purchase, send
       <b style="text-decoration: underline"
         >NOK {{ apiResponse.order?.totalPrice }},-</b
       >
@@ -181,6 +182,7 @@
 <script lang="ts" setup>
 import { computed, ref, toRaw } from 'vue'
 import { ProductInCart, productsRaw, ProductWithOption } from './products'
+import { ApiState, isValidEmail } from './types'
 
 const cart = ref<ProductInCart[]>([])
 const products = ref<ProductWithOption[]>(
@@ -193,12 +195,6 @@ const products = ref<ProductWithOption[]>(
   )
 )
 
-enum ApiState {
-  unknown,
-  success,
-  error,
-}
-
 const name = ref('')
 const email = ref('')
 const apiResponse = ref({
@@ -207,11 +203,6 @@ const apiResponse = ref({
   order: null as Order | null,
 })
 const orderLoading = ref(false)
-
-const isValidEmail = (email: string) => {
-  var re = /\S+@\S+\.\S+/
-  return re.test(email)
-}
 
 const totalPrice = computed(() => {
   return cart.value
