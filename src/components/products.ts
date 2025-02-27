@@ -5,7 +5,7 @@ export type Product = {
   name: string
   price: number
   image: string
-  options: { text: string; value: string }[]
+  options: readonly { text: string; value: string }[]
 }
 
 export type ProductWithOption = Product & {
@@ -33,7 +33,9 @@ export const productsRaw = [
     name: 'Active t-shirt',
     price: 300,
     image: 'products/active-t-shirt.png',
-    options: manWomanSizeOptions,
+    options: manWomanSizeOptions.filter(
+      (o) => o.value != 'woman-xs' && o.value != 'man-xs'
+    ),
   },
   {
     id: 'crewneck',
