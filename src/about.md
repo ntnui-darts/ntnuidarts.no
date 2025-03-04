@@ -17,11 +17,9 @@ We use Slack as our information channel. Send an email to darts@ntnui.no or DM o
 | Responsibility | Name                       | Email                      |
 | -------------- | -------------------------- | -------------------------- |
 | Leader         | Gregor Moe                 | <darts-leder@ntnui.no>     |
-| Deputy Leader  | Eric Niclas Alexander Mård | <darts-nestleder@ntnui.no> |
+| Deputy Leader  | Mikkel Nes                 | <darts-nestleder@ntnui.no> |
 | Cashier        | Knut Kolstad               | <darts-kasserer@ntnui.no>  |
-| Marketing      | Mikkel Nes                 | <darts-sosial@ntnui.no>    |
 | Tournaments    | Ludvik Hembre              | <darts-turnering@ntnui.no> |
 | IT             | Magne Tenstad              | <darts-it@ntnui.no>        |
 | Material       | Ingrid Schrader            | <darts-material@ntnui.no>  |
-| Parasports     | Stian Alseth               | <darts-para@ntnui.no>      |
-| HSE            | Nikolay Klausen            | <darts-hms@ntnui.no>       |
+| Parasports     | Vebjørn Hansen-Lind        | <darts-para@ntnui.no>      |
