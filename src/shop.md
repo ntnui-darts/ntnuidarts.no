@@ -1,12 +1,14 @@
 <script setup>
   import ShopPage from './components/ShopPage.vue'
-
-  (function(){
-  const lastOrderDate = new Date("2025-02-24"); //endre denne til dato til siste ordre
-  const currentDate = new Date();
+  import { onMounted, ref } from 'vue'
   
-  document.getElementById("days-since").textContent = Math.ceil((currentDate - lastOrderDate) / (24*60*60*1000));
-  })();
+  const daysSince = ref(0)
+  
+  onMounted(() => {
+    const lastOrderDate = new Date('2025-02-24')
+    const currentDate = new Date()
+    daysSince.value = Math.ceil((currentDate - lastOrderDate) / (24 * 60 * 60 * 1000))
+  })
 </script>
 
 # Shop
@@ -14,7 +16,7 @@
 Welcome to our store! Order some nice merch, pay with Vipps and collect your items at a darts training session.
 
 ::: warning
-We ordered merch **<span id="days-since"></span>** days ago. We aim to order merch once every semester.
+We ordered merch **{{ daysSince }}** days ago. We aim to order merch once every semester.
 :::
 
 ::: info
