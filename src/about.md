@@ -4,8 +4,6 @@ We are NTNUI Darts! 🎯
 
 We aim to create a friendly arena for darts enthusiasts among students in Trondheim!
 
-We use Slack as our information channel. Send an email to darts@ntnui.no or DM our Instagram: @ntnuidarts to receive an invitation, or if you have any other questions.
-
 ## Links
 
 - [NTNUI Group Page](https://medlem.ntnui.no/groups/darts/)
