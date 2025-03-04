@@ -1,10 +1,12 @@
 <script setup>
   import ShopPage from './components/ShopPage.vue'
-  
+
+  (function(){
   const lastOrderDate = new Date("2025-02-24"); //endre denne til dato til siste ordre
   const currentDate = new Date();
   
   document.getElementById("days-since").textContent = Math.ceil((currentDate - lastOrderDate) / (24*60*60*1000));
+  })();
 </script>
 
 # Shop
