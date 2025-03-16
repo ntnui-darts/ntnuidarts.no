@@ -20,7 +20,7 @@ We ordered merch **{{ daysSince }}** days ago. We aim to order merch once every 
 :::
 
 ::: info
-Not sure what size to choose? Have a look at the [product measurements](public/product-sizes.pdf).
+Not sure what size to choose? Have a look at the [product measurements](./public/product-measurements.pdf).
 :::
 
 <ShopPage></ShopPage>
