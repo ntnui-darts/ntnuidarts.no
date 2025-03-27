@@ -24,14 +24,14 @@ export const productsRaw = [
   {
     id: 'standard-t-shirt',
     name: 'Standard t-shirt',
-    price: 250,
+    price: 275,
     image: 'products/standard-t-shirt.png',
     options: manWomanSizeOptions,
   },
   {
     id: 'active-t-shirt',
     name: 'Active t-shirt',
-    price: 300,
+    price: 350,
     image: 'products/active-t-shirt.png',
     options: manWomanSizeOptions.filter(
       (o) => o.value != 'woman-xs' && o.value != 'man-xs'
@@ -40,21 +40,21 @@ export const productsRaw = [
   {
     id: 'crewneck',
     name: 'Crewneck',
-    price: 350,
+    price: 400,
     image: 'products/crewneck.png',
     options: unisexSizeOptions,
   },
   {
     id: 'hoodie',
     name: 'Hoodie',
-    price: 400,
+    price: 450,
     image: 'products/hoodie.png',
     options: unisexSizeOptions,
   },
   {
     id: 'flights',
     name: 'Flights, set of three',
-    price: 30,
+    price: 35,
     image: 'products/flights.png',
     options: [],
   },
