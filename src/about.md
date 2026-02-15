@@ -14,7 +14,7 @@ We aim to create a friendly arena for darts enthusiasts among students in Trondh
 
 | Responsibility | Name                       | Email                      |
 | -------------- | -------------------------- | -------------------------- |
-| Leader         | Gregor Moe                 | <darts-leder@ntnui.no>     |
+| Leader         | Ludvik Hembre              | <darts-leder@ntnui.no>     |
 | Deputy Leader  | Mikkel Nes                 | <darts-nestleder@ntnui.no> |
 | Cashier        | Knut Kolstad               | <darts-kasserer@ntnui.no>  |
 | Tournaments    | Ludvik Hembre              | <darts-turnering@ntnui.no> |
