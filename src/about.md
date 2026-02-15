@@ -12,12 +12,10 @@ We aim to create a friendly arena for darts enthusiasts among students in Trondh
 
 ## Board Members
 
-| Responsibility | Name                       | Email                      |
-| -------------- | -------------------------- | -------------------------- |
-| Leader         | Ludvik Hembre              | <darts-leder@ntnui.no>     |
-| Deputy Leader  | Mikkel Nes                 | <darts-nestleder@ntnui.no> |
-| Cashier        | Knut Kolstad               | <darts-kasserer@ntnui.no>  |
-| Tournaments    | Ludvik Hembre              | <darts-turnering@ntnui.no> |
-| IT             | Magne Tenstad              | <darts-it@ntnui.no>        |
-| Material       | Ingrid Schrader            | <darts-material@ntnui.no>  |
-| Parasports     | Vebjørn Hansen-Lind        | <darts-para@ntnui.no>      |
+| Responsibility | Name                       | Email                        |
+| -------------- | -------------------------- | ---------------------------- |
+| Leader         | Ludvik Hembre              | <darts-leder@ntnui.no>       |
+| Deputy Leader  | Michael Nilsen             | <darts-nestleder@ntnui.no>   |
+| Cashier        | Vebjørn Hansen.Lind        | <darts-kasserer@ntnui.no>    |
+| Board Member   | Maximilian Linge Lystad    | <maximilian.lystad@ntnui.no> |
+
