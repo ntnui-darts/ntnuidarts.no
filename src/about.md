@@ -16,6 +16,7 @@ We aim to create a friendly arena for darts enthusiasts among students in Trondh
 | -------------- | -------------------------- | ---------------------------- |
 | Leader         | Ludvik Hembre              | <darts-leder@ntnui.no>       |
 | Deputy Leader  | Michael Nilsen             | <darts-nestleder@ntnui.no>   |
-| Cashier        | Vebjørn Hansen.Lind        | <darts-kasserer@ntnui.no>    |
+| Cashier        | Vebjørn Hansen-Lind        | <darts-kasserer@ntnui.no>    |
 | Board Member   | Maximilian Linge Lystad    | <maximilian.lystad@ntnui.no> |
+| Board Member   | Mari Brenna                | <mari.brenna@ntnui.no>       |
 
