@@ -43,8 +43,7 @@
   >
     <span v-if="apiResponse.state == ApiState.success">
       Success! ✅ <br />
-      Training fee details has been sent to your email, along with a Slack
-      invitation link.
+      A Slack invitation link has been sent to your email.
     </span>
     <span v-if="apiResponse.state == ApiState.error">{{
       apiResponse.response
