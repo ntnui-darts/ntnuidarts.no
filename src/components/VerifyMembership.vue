@@ -43,6 +43,11 @@
   >
     <span v-if="apiResponse.state == ApiState.success">
       Success! ✅ <br />
+      Training fee details have been sent to your email.
+      <br />
+      <a :href="slackInviteUrl" target="_blank" rel="noopener noreferrer">
+        Join NTNUI Darts on Slack
+      </a>
       A Slack invitation link has been sent to your email.
     </span>
     <span v-if="apiResponse.state == ApiState.error">{{
@@ -101,9 +106,16 @@ const onVerify = async () => {
       },
       body: JSON.stringify(credentials),
     })
+
+    const responseText = await response.text()
+
+    if (!response.ok) {
+      throw new Error(responseText || `HTTP ${response.status}`)
+    }
+
     apiResponse.value = {
       state: ApiState.success,
-      response: await response.text(),
+      response: responseText,
     }
   } catch (err) {
     apiResponse.value = {
@@ -116,6 +128,9 @@ const onVerify = async () => {
 
 const appsScriptApiUrl =
   'https://script.google.com/macros/s/AKfycbz5v_jWzUpiJxDX_kdD4nVfl7vwk23uQGK7podOjOmkRK2HzQ5wl6YK8ZsMZ2vkx4tk/exec'
+
+const slackInviteUrl =
+  'https://join.slack.com/t/ntnuidarts/shared_invite/zt-48k4clj6c-4i0vOgRCogrkylcbsrCpHw'
 </script>
 
 <style>
