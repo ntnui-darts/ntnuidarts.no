@@ -48,6 +48,7 @@
       <a :href="slackInviteUrl" target="_blank" rel="noopener noreferrer">
         Join NTNUI Darts on Slack
       </a>
+      A Slack invitation link has been sent to your email.
     </span>
     <span v-if="apiResponse.state == ApiState.error">{{
       apiResponse.response
