@@ -6,13 +6,13 @@
     "supabase": "supabase gen types typescript --project-id euetpcqmwfdwvbjdqufo --schema public > src/types/supabase.ts"
   },
   "devDependencies": {
-    "supabase": "^1.110.1",
-    "vitepress": "^1.0.0-rc.24"
+    "supabase": "^2.117.0",
+    "vitepress": "^1.6.4"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.4",
-    "chart.js": "^4.4.0",
+    "@supabase/supabase-js": "^2.116.0",
+    "chart.js": "^4.5.1",
     "chartjs-adapter-date-fns": "^3.0.0",
-    "date-fns": "^2.30.0"
+    "date-fns": "^4.4.0"
   }
 }
