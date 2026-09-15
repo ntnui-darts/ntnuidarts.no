@@ -5,6 +5,8 @@
       flex-direction: column;
       align-items: center;
       margin: auto;
+      width: 100%;
+      min-width: 0;
     "
   >
     <h1 style="text-align: center; font-size: larger">Elo Rating</h1>
@@ -16,39 +18,41 @@
       style="width: 100%"
     >
       <h1 style="text-align: center; font-size: medium">{{ title }}</h1>
-      <table style="width: 100%">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th
-              v-for="[sb, icon] in columns"
-              class="pointer"
-              :class="{ selected: sb == sortBy }"
-              @click="setSortBy(sb)"
-            >
-              {{ icon }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(row, i) in rows">
-            <td
-              v-for="item in row.slice(0, 6)"
-              :class="{ 'player-name': typeof item == 'string' }"
-              :style="{
-                'text-align': typeof item == 'number' ? 'end' : 'start',
-              }"
-            >
-              <span v-if="typeof item == 'string'"
-                >{{ i + 1 }}. {{ item }}</span
+      <div class="table-scroll">
+        <table class="elo-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th
+                v-for="[sb, icon] in columns"
+                class="pointer"
+                :class="{ selected: sb == sortBy }"
+                @click="setSortBy(sb)"
               >
-              <span v-if="typeof item == 'number'">{{
-                item == initialElo || item == 0 ? '-' : Math.round(item)
-              }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                {{ icon }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, i) in rows">
+              <td
+                v-for="item in row.slice(0, 6)"
+                :class="{ 'player-name': typeof item == 'string' }"
+                :style="{
+                  'text-align': typeof item == 'number' ? 'end' : 'start',
+                }"
+              >
+                <span v-if="typeof item == 'string'"
+                  >{{ i + 1 }}. {{ item }}</span
+                >
+                <span v-if="typeof item == 'number'">{{
+                  item == initialElo || item == 0 ? '-' : Math.round(item)
+                }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <br />
       <br />
     </div>
@@ -133,9 +137,28 @@ const sortedRows = computed(() => {
 </script>
 
 <style scoped>
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+.elo-table {
+  display: table;
+  width: 100%;
+  overflow: visible;
+}
+.elo-table th:first-child,
+.elo-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: inherit;
+}
+.elo-table th:first-child {
+  background-color: var(--vp-c-bg-soft);
+}
 .player-name {
   width: 100%;
-  min-width: 10ch;
+  min-width: 15ch;
   max-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
