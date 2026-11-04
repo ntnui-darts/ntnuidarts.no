@@ -11,7 +11,7 @@
 
 ### Local development
 
-1. Make sure you have installed [git](https://git-scm.com/), [Node](https://nodejs.org/en) and [VSCode](https://code.visualstudio.com/)
+1. Make sure you have installed [git](https://git-scm.com/), [Node.js 22 or later](https://nodejs.org/en) and [VSCode](https://code.visualstudio.com/)
 2. Clone this repository by running `git clone https://github.com/ntnui-darts/ntnuidarts.no.git` in any terminal
 3. Open the repo in VSCode
 4. Run `npm install` in the VSCode terminal to install the project dependencies
