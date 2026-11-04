@@ -31,7 +31,7 @@ export const productsRaw = [
   {
     id: 'active-t-shirt',
     name: 'Active t-shirt',
-    price: 350,
+    price: 375,
     image: 'products/active-t-shirt.png',
     options: manWomanSizeOptions.filter(
       (o) => o.value != 'woman-xs' && o.value != 'man-xs'
@@ -40,14 +40,14 @@ export const productsRaw = [
   {
     id: 'crewneck',
     name: 'Crewneck',
-    price: 400,
+    price: 450,
     image: 'products/crewneck.png',
     options: unisexSizeOptions,
   },
   {
     id: 'hoodie',
     name: 'Hoodie',
-    price: 450,
+    price: 500,
     image: 'products/hoodie.png',
     options: unisexSizeOptions,
   },
